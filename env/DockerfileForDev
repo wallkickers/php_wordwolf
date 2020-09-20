@@ -3,6 +3,10 @@ FROM php:7.4-fpm-buster
 RUN apt-get update
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer;
-RUN apt-get -y install curl git zip unzip
+RUN apt-get -y install curl git zip unzip wget
 RUN docker-php-ext-install sockets
 RUN composer require linecorp/line-bot-sdk
+
+# ngrokインストール&解凍
+RUN wget -P /usr/local/bin https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+RUN unzip /usr/local/bin/ngrok-stable-linux-amd64.zip -d /usr/local/bin
