@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
+    // debug用
+    Route::get('/', 'LineBotController@debug')->name('line.debug');
+
+    Route::post('/callback', 'LineBotController@callback')->name('line.callback');
 });
